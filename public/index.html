@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Electron Notepad Opener</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Electron Notepad Opener</h1>
+  <button id="open-notepad">Open Notepad</button>
+
+  <script>
+    document.getElementById('open-notepad').addEventListener('click', () => {
+      fetch('http://localhost:3001/open-notepad')
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            console.log('Notepad opened successfully');
+          } else {
+            console.error('Failed to open Notepad', data.error);
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    });
+  </script>
+</body>
+</html>
